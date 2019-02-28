@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+    producer:
+        build: ./producer
+
+    consumer:
+        build: ./consumer
+
+    rabbitmq:
+        image: "rabbitmq:alpine"
+  
