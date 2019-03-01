@@ -4,7 +4,7 @@ import random
 import time
 import psycopg2
 
-print("[x] consumer started")
+print("[x] consumer started", flush=True)
 
 while True:
     try:
@@ -15,7 +15,7 @@ while True:
             password="postgres"
         )
     except psycopg2.Error:
-        print('consumer need to rconnect to database')
+        print('[x] consumer need to reconnect to database', flush=True)
         time.sleep(3)
     else:
         break
@@ -26,10 +26,10 @@ db_cursor.execute("CREATE TABLE IF NOT EXISTS randnums (id SERIAL PRIMARY KEY, n
 db_cursor.close()
 db_connect.commit()
 add_number_query = "INSERT INTO randnums (num) VALUES (%s)"
-print("[x] connection to database established")
+print("[x] connection to database established", flush=True)
 
 def callback(ch, method, properties, body):
-    print("[x] reveived " + str(body))
+    print("[x] reveived " + str(body), flush=True)
     cursor = db_connect.cursor()
     #body_value = int.from_bytes(body, byteorder="little")
     body_value = int(body)    
@@ -46,6 +46,6 @@ while True:
         channel.start_consuming()
     except (pika.exceptions.ConnectionClosed, OSError):
         time.sleep(1)
-        print("I need to retry")
+        print("[x] consumer need to reconnect to rabbitmq", flush=True)
         
 
