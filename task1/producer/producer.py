@@ -19,15 +19,16 @@ def connect_to_rabbitmq():
             channel.queue_declare(queue='hello')    
             return (connection, channel)
         except (pika.exceptions.ConnectionClosed, OSError):
-            time.sleep(2)
+            time.sleep(1)
             print("I need to retry")
 
+print("[x] producer started")
 connection, channel = connect_to_rabbitmq()
 while True:
     new_rand = my_rand()
     channel.basic_publish(exchange='', routing_key='hello', body=str(new_rand))
-    print("send " + str(new_rand))
-    time.sleep(random.randint(1, 6))
+    print("[x] message was sent")
+    time.sleep(random.randint(1, 4))
 
 connection.close()
 
