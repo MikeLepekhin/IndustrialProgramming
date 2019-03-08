@@ -5,3 +5,7 @@ class Question(models.Model):
     email = models.EmailField()
     topic = models.CharField(max_length=200)
     text = models.TextField()
+    
+class Answer(models.Model):
+    question_id = models.IntegerField()
+    text = models.TextField()
