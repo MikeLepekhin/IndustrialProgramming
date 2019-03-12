@@ -1,0 +1,27 @@
+h1 {
+  color: blue;
+}
+
+body {
+  text-align: center;   
+}
+
+.submit {
+  color: white;
+  background-color: green;
+  border: none;
+  text-align: center;
+  border-radius: 4px;
+  height: 30;
+  width: 120;
+}
+
+.submit:after {
+  color: white;
+  background-color: blue;
+  border: none;
+  text-align: center;
+  border-radius: 4px;
+  height: 30;
+  width: 120;
+}
