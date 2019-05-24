@@ -7,19 +7,21 @@
         <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
 
     </head>
-    
-    <h1>Форма для вопросов</h1>
-    
-    <h3>Задать вопрос</h3>
-    <form class="question_form" method="POST" action="process_question">
-    {% csrf_token %}
-        Имя: <input type="text" name="name"> <br>
-        E-mail: <input type="text" name="email"> <br>
-        Тема вопроса: <input type="text" name="topic"> <br>
-        Вопрос: <br><textarea name="text" cols=50 rows=6> </textarea> <br>
+   
+    <div class="question_form">
+        <h1>Форма для вопросов</h1>
         
-        <input type="submit" class="submit" value="Отправить">
-    </form>
+        <h3>Задать вопрос</h3>
+        <form class="question_form" method="POST" action="process_question">
+        {% csrf_token %}
+            Имя: <input type="text" name="name"> <br>
+            E-mail: <input type="text" name="email"> <br>
+            Тема вопроса: <input type="text" name="topic"> <br>
+            <br><textarea name="text" cols=50 rows=6> </textarea> <br>
+            
+            <input type="submit" class="submit" value="Отправить">
+        </form>
+    </div>
     {% if questions|length > 0 %}
         <h3>Список вопросов ({{questions|length}})</h3>
     {% else %}
@@ -29,21 +31,22 @@
     {% endif %}
     <table>
     {% for question in questions %}
-        <b>{{question.topic}} (от <a href="mailto: {{question.email}}">{{question.name}}</a>) </b><br>
-        {{question.text}}<br>
-        <b>Ответы ({{question.answers|length}})</b>
-        <table>
-        {% for answer in question.answers %}
-            <tr>
-                {{answer.text}}<br>
-            </tr>
-        {% endfor %}
-        </table>
+        <div class="question">
+            <b>{{question.topic}} (от <a href="mailto: {{question.email}}">{{question.name}}</a>) </b><br>
+            {{question.text}}<br>
+        </div>
+        <div class="answers">
+            <b>Ответы ({{question.answers|length}})</b><br>
+            {% for answer in question.answers %}
+                    {{answer.text}}<br><hr class="answer_separator">
+            {% endfor %}
+        </div>
+       
             <form class="answer_form" method="POST" action="process_answer">
             {% csrf_token %}
                 <input type="hidden" name="question_id" value="{{question.id}}">
-                 <br><textarea name="text" cols=50 rows=3> </textarea> <br>
-                <input type="submit" class="submit" value="Ответить">
+                 <br><textarea class="answer_field" name="text"> </textarea> <br>
+                <input type="submit" class="submit submit_answer" value="Ответить">
             </form>
         
     {% endfor %}

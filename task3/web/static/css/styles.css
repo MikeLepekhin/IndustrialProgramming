@@ -16,12 +16,46 @@ body {
   width: 120;
 }
 
-.submit:after {
+.submit:hover {
   color: white;
-  background-color: blue;
+  background-color: #1b724e;
   border: none;
   text-align: center;
   border-radius: 4px;
   height: 30;
   width: 120;
+}
+
+.submit_answer {
+  position: relative;
+  left: -50px;
+}
+
+.question_form {
+  text-align: center;
+  background-color: #cded97;
+}
+
+.answer_field {
+  width: 300px;
+  position: relative;
+  left: -50px;
+}
+
+.answers {
+  position: relative;
+  left: 650px;
+  text-align: left; 
+} 
+
+.question {
+  position: relative;
+  left: 600px;
+  text-align: left;  
+}
+
+.answer_separator {
+  position: relative;
+  left: -700px;
+  width: 300px;
 }

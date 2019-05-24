@@ -11,15 +11,17 @@ class QuestionWithAnswers:
         self.name = question.name
         self.topic = question.topic
         self.text = question.text
-        self.answers = answers
+        self.email = question.email
         
+        self.answers = answers
 
 def index(request):
     raw_questions = Question.objects.all()
     questions = []
     for question in raw_questions:
         questions.append(QuestionWithAnswers(question, Answer.objects.filter(question_id=question.id)))
-    
+        
+
     return render(
         request, 
         '/code/web/templates/index.html',
